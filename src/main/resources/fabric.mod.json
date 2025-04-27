@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "nomorevanish",
+  "version": "${version}",
+  "name": "NoMoreVanish",
+  "description": "Adds /nomorevanish command to view players from PlayerInfoUpdate/PlayerInfoRemove/Team packets",
+  "icon": "assets/nomorevanish/icon.png",
+  "authors": [ "envizar" ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.envizar.nomorevanish.client.MainClient"
+    ],
+    "main": [
+      "dev.envizar.nomorevanish.Main"
+    ]
+  },
+  "mixins": [
+    "nomorevanish.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": ">=${minecraft_version}"
+  }
+}

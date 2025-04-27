@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.envizar.nomorevanish.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [],
+  "client": [
+    "PlayerJoinQuitMixin",
+    "PlayerInfoMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
