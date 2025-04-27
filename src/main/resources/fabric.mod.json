@@ -3,11 +3,11 @@
   "id": "nomorevanish",
   "version": "${version}",
   "name": "NoMoreVanish",
-  "description": "Adds /nomorevanish command to view players from PlayerInfoUpdate/PlayerInfoRemove/Team packets",
+  "description": "Мод для раскрытия игроков в ванише. | Mod for revealing vanished players.",
   "icon": "assets/nomorevanish/icon.png",
   "authors": [ "envizar" ],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "environment": "client",
   "entrypoints": {
     "client": [
