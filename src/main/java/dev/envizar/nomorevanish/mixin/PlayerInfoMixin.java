@@ -15,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @Mixin(ClientPlayNetworkHandler.class)
@@ -30,7 +32,9 @@ public abstract class PlayerInfoMixin {
         for (PlayerListS2CPacket.Entry entry : packet.getEntries()) {
             GameProfile profile = entry.profile();
             if (profile == null) continue;
-            PlayerInfoStore.playerInfoUpdate.add(profile.getName());
+            PlayerInfoStore.playerInfoUpdate.add(
+                    PlayerInfoStore.formatName(profile.getName())
+            );
         }
     }
 
@@ -45,7 +49,22 @@ public abstract class PlayerInfoMixin {
     private void onTeam(TeamS2CPacket packet, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null) return;
-        PlayerInfoStore.playerTeams.addAll(packet.getPlayerNames());
+
+        String teamName = PlayerInfoStore.formatName(packet.getTeamName());
+
+        Map<String, Set<String>> teams;
+        if (teamName.startsWith("CIT-")) {
+            teams = PlayerInfoStore.teamsNpc;
+        } else {
+            teams = PlayerInfoStore.teams;
+        }
+
+        if (teams.containsKey(teamName)) {
+            teams.get(teamName).addAll(PlayerInfoStore.formatNames(packet.getPlayerNames()));
+        } else {
+            teams.put(teamName, PlayerInfoStore.formatNames(packet.getPlayerNames()));
+        }
+
     }
 
 }
